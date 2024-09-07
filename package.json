@@ -1,0 +1,30 @@
+{
+  "name": "emee_balihalus",
+  "version": "1.0.0",
+  "description": "Website Reservasi Spa BaliHalus",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src/index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emeraldachecia/EMEE_BaliHalus.git"
+  },
+  "author": "emeraldacp",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emeraldachecia/EMEE_BaliHalus/issues"
+  },
+  "homepage": "https://github.com/emeraldachecia/EMEE_BaliHalus#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "ejs": "^3.1.10",
+    "express-ejs-layouts": "^2.5.1",
+    "express-fileupload": "^1.5.1",
+    "express-session": "^1.18.0",
+    "mysql2": "^3.11.0",
+    "nodemon": "^3.1.4",
+    "path": "^0.12.7"
+  }
+}
