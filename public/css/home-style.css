@@ -1,0 +1,79 @@
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+  }
+  
+  .hero {
+    background-image: linear-gradient(to bottom, #f7f7f7, #e7e7e7);
+    padding: 100px 0;
+    text-align: center;
+  }
+  
+  .hero h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+  
+  .hero p {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  
+  .btn-reserve {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .features {
+    background-color: #f7f7f7;
+    padding: 40px 0;
+  }
+  
+  .features ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .features li {
+    margin-bottom: 20px;
+  }
+  
+  .features i {
+    font-size: 24px;
+    margin-right: 10px;
+  }
+  
+  .features h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .cta {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 40px 0;
+    text-align: center;
+  }
+  
+  .cta h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .cta p {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  
+  footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+  }
