@@ -1,11 +1,10 @@
-export const home = async (req, res) => {
+export const home_page = async (req, res) => {
     try {
-        res.render("main", {
-            layout: "main",
-            title: "Usaha Mikro Kecil",
+        res.render("homepage", {
+            layout: "layouts/main",
+            title: "Reservasi Bali Halus",
             script: "home-script.js",
             style: "home-style.css",
-            message: "berhasil"
         });
     } catch (error) {
         console.error(error);
