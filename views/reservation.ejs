@@ -1,0 +1,33 @@
+<div class="container">
+    <h1>Spa Reservation</h1>
+    <form id="reservationForm">
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="date">Select Date:</label>
+        <input type="date" id="date" name="date" required>
+
+        <label for="service">Select Service:</label>
+        <select id="service" name="service" required>
+            <option value="">--Choose a Service--</option>
+            <option value="spa">Spa</option>
+            <option value="body-massage">Body Massage</option>
+            <option value="refleksi">Refleksi</option>
+        </select>
+
+        <label for="branch">Choose BaliHalus Branch:</label>
+        <select id="branch" name="branch" required>
+            <option value="">--Choose a Branch--</option>
+            <option value="bali-1">BaliHalus - Ubud</option>
+            <option value="bali-2">BaliHalus - Seminyak</option>
+            <option value="bali-3">BaliHalus - Kuta</option>
+        </select>
+
+        <button type="submit" class="submit-btn">Reserve Now</button>
+    </form>
+
+    <div id="confirmation" class="hidden">
+        <h2>Reservation Confirmed</h2>
+        <p id="confirmationDetails"></p>
+    </div>
+</div>
