@@ -1,10 +1,10 @@
-export const reservation_page = async (req, res) => {
+export const history_page = async (req, res) => {
     try {
-        res.render("reservation", {
+        res.render("history", {
             layout: "layouts/main",
             title: "Reservasi Bali Halus",
-            script: "reservation-script.js",
-            style: "reservation-style.css",
+            script: "history-script.js",
+            style: "history-style.css",
         });
     } catch (error) {
         console.error(error);
