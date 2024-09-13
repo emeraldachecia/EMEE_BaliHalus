@@ -5,6 +5,7 @@ export const history_page = async (req, res) => {
             title: "Reservasi Bali Halus",
             script: "history-script.js",
             style: "history-style.css",
+            hideHeader: false
         });
     } catch (error) {
         console.error(error);

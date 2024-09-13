@@ -1,11 +1,11 @@
-export const home_page = async (req, res) => {
+export const dashboard_page = async (req, res) => {
     try {
-        res.render("homepage", {
+        res.render("dashboard", {
             layout: "layouts/main",
             title: "Reservasi Bali Halus",
-            script: "home-script.js",
-            style: "home-style.css",
-            hideHeader: false
+            script: "dashboard-script.js",
+            style: "dashboard-style.css",
+            hideHeader: true
         });
     } catch (error) {
         console.error(error);

@@ -5,6 +5,7 @@ export const service_page = async (req, res) => {
             title: "Reservasi Bali Halus",
             script: "service-script.js",
             style: "service-style.css",
+            hideHeader: false
         });
     } catch (error) {
         console.error(error);
