@@ -1,0 +1,36 @@
+.category {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px;
+}
+
+.box {
+    width: 200px;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    border: 2px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.box img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.box p {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.box:hover p {
+    color: #007BFF;
+}
