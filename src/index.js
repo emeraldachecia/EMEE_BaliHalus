@@ -2,6 +2,7 @@ import express from "express";
 import expressLayouts from "express-ejs-layouts";
 import path from "path";
 import routes from "./routes.js"
+import bodyParser from "body-parser";
 
 const app = express();
 const port = 8080;
