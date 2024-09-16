@@ -7,7 +7,6 @@ class UserModel {
 				CREATE TABLE IF NOT EXISTS User (
 					UserID INT PRIMARY KEY,
 					Name VARCHAR(100) NOT NULL,
-                    Username VARCHAR(100) NOT NULL UNIQUE,
 					Password TEXT NOT NULL,
 					PhoneNumber VARCHAR(20) NOT NULL UNIQUE,
 					Type ENUM('Member', 'Admin') NOT NULL
@@ -17,7 +16,8 @@ class UserModel {
 			await BaliHalusDB.execute(query);
 
 		} catch (error) {
-			console.error(error);
+            console.error(error);
+            throw error;
 		}
 	}
 	
@@ -27,22 +27,21 @@ class UserModel {
 			const query = `
                 INSERT INTO User (
 					Name,
-                    Username,
                     Password,
 					PhoneNumber,
 					Type
-                ) VALUES (?, ?, ?, ?, ?)
+                ) VALUES (?, ?, ?, ?)
             `;
 			const values = [
                 User.Name,
-                User.Username,
 				User.Password,
 				User.PhoneNumber,
 				User.Type,
 			];
 			await BaliHalusDB.execute(query, values);
 		} catch (error) {
-			console.error(error);
+            console.error(error);
+            throw error;
 		}
 	}
 
@@ -52,21 +51,20 @@ class UserModel {
                 UPDATE User
                 SET
 					Name = ?,
-                    Username = ?,
 					Password = ?,
 					PhoneNumber = ?,
                 WHERE UserID = ?
             `;
 			const values = [
                 User.Name,
-                User.Username,
 				User.Password,
 				User.PhoneNumber,
 				User.UserID,
 			];
 			await BaliHalusDB.execute(query, values);
 		} catch (error) {
-			console.error(error);
+            console.error(error);
+            throw error;
 		}
 	}
 
@@ -78,14 +76,15 @@ class UserModel {
             `;
 			await BaliHalusDB.execute(query, [UserID]);
 		} catch (error) {
-			console.error(error);
+            console.error(error);
+            throw error;
 		}
 	}
 
 	static async readOne(UserID) {
 		try {
 			const query = `
-                SELECT UserID, Name, Username, PhoneNumber FROM User 
+                SELECT UserID, Name, PhoneNumber FROM User 
                 WHERE UserID = ?
             `;
             const queryReadReservation = `
@@ -93,23 +92,40 @@ class UserModel {
                 WHERE UserID = ?
             `;
             const [dataUser] = await BaliHalusDB.execute(query, [UserID]);
-            const [dataReservation] = await BaliHalusDB.execute(query, [UserID]);
+            const [dataReservation] = await BaliHalusDB.execute(queryReadReservation, [UserID]);
             
-            return { dataUser: dataUser, dataReservation: dataReservation };
+            return { dataUser: dataUser[0], dataReservation: dataReservation };
 		} catch (error) {
-			console.error(error);
+            console.error(error);
+            throw error;
 		}
-	}
+    }
+    
+    static async readByPhoneNumber(PhoneNumber) {
+        try {
+            const query = `
+                SELECT UserID, Name, Password, PhoneNumber FROM User
+                WHERE PhoneNumber = ?
+            `;
+            const [dataUser] = await BaliHalusDB.execute(query, [PhoneNumber]);
+
+            return dataUser[0];
+        } catch (error) {
+            console.error(error);
+            throw error;
+		}
+    }
 
 	static async readAll() {
 		try {
 			const query = `
-                SELECT UserID, Name, Username, PhoneNumber FROM User
+                SELECT UserID, Name, PhoneNumber FROM User
             `;
 			const [rows] = await BaliHalusDB.execute(query);
 			return rows;
 		} catch (error) {
-			console.error(error);
+            console.error(error);
+            throw error;
 		}
 	}
 }
