@@ -46,3 +46,9 @@ main {
     background-color: lightseagreen;
     border-radius: 2rem;
 }
+
+form {
+    max-width: 260px;
+    width: 100%;
+    background-color: red;
+}
