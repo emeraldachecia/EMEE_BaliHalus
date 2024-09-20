@@ -1,14 +1,12 @@
 import { BaliHalusDB } from "../../config/BaliHalusDB.js";
 
-class FranchiseModel {
+class ProductModel {
 	static async defineModel() {
 		try {
 			const query = `
-				CREATE TABLE IF NOT EXISTS Franchise (
-					FranchiseID INT PRIMARY KEY,
-					Name VARCHAR(100) NOT NULL,
-                    Address VARCHAR(255) NOT NULL,
-                    City VARCHAR(100) NOT NULL
+				CREATE TABLE IF NOT EXISTS Product (
+					ProductID INT PRIMARY KEY,
+					Name VARCHAR(50) NOT NULL
 				)
 			`;
 			
@@ -20,19 +18,15 @@ class FranchiseModel {
 		}
 	}	
 
-	static async create(Franchise) {
+	static async create(Product) {
 		try {
 			const query = `
-                INSERT INTO Franchise (
+                INSERT INTO Product (
 					Name,
-                    Address,
-					City
-                ) VALUES (?, ?, ?)
+                ) VALUES (?)
             `;
 			const values = [
-				Franchise.Name,
-				Franchise.Address,
-				Franchise.City,
+				Product.Name,
 			];
 			await BaliHalusDB.execute(query, values);
 		} catch (error) {
@@ -41,20 +35,16 @@ class FranchiseModel {
 		}
 	}
 
-	static async update(Franchise) {
+	static async update(Product) {
 		try {
 			const query = `
-                UPDATE Franchise
+                UPDATE Product
                 SET 
 					Name = ?,
-					Address = ?,
-					City = ?,
-                WHERE FranchiseID = ?
+                WHERE ProductID = ?
             `;
 			const values = [
-				Franchise.Name,
-				Franchise.Address,
-				Franchise.City,
+				Product.Name,
 			];
 			await BaliHalusDB.execute(query, values);
 		} catch (error) {
@@ -63,26 +53,26 @@ class FranchiseModel {
 		}
 	}
 
-	static async delete(FranchiseID) {
+	static async delete(ProductID) {
 		try {
 			const query = `
-                DELETE FROM Franchise
-                WHERE FranchiseID = ?
+                DELETE FROM Product
+                WHERE ProductID = ?
             `;
-			await BaliHalusDB.execute(query, [FranchiseID]);
+			await BaliHalusDB.execute(query, [ProductID]);
 		} catch (error) {
             console.error(error);
             throw error;
 		}
 	}
 
-	static async readOne(FranchiseID) {
+	static async readOne(ProductID) {
 		try {
 			const query = `
-                SELECT * FROM Franchise
-                WHERE FranchiseID = ?
+                SELECT * FROM Product
+                WHERE ProductID = ?
             `;
-			const [rows] = await BaliHalusDB.execute(query, [FranchiseID]);
+			const [rows] = await BaliHalusDB.execute(query, [ProductID]);
 			return rows[0];
 		} catch (error) {
             console.error(error);
@@ -93,7 +83,7 @@ class FranchiseModel {
 	static async readAll() {
 		try {
 			const query = `
-                SELECT * FROM Franchise
+                SELECT * FROM Product
             `;
 			const [rows] = await BaliHalusDB.execute(query);
 			return rows;
@@ -104,4 +94,4 @@ class FranchiseModel {
 	}
 }
 
-export { FranchiseModel };
+export { ProductModel };

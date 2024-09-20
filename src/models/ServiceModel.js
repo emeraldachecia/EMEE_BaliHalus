@@ -1,14 +1,14 @@
 import { BaliHalusDB } from "../../config/BaliHalusDB.js";
 
-class FranchiseModel {
+class ServiceModel {
 	static async defineModel() {
 		try {
 			const query = `
-				CREATE TABLE IF NOT EXISTS Franchise (
-					FranchiseID INT PRIMARY KEY,
+				CREATE TABLE IF NOT EXISTS Service (
+					ServiceID INT PRIMARY KEY,
 					Name VARCHAR(100) NOT NULL,
-                    Address VARCHAR(255) NOT NULL,
-                    City VARCHAR(100) NOT NULL
+                    ParentID INT NULL,
+					FOREIGN KEY (ParentID) REFERENCES Service(ServiceID)
 				)
 			`;
 			
@@ -20,19 +20,17 @@ class FranchiseModel {
 		}
 	}	
 
-	static async create(Franchise) {
+	static async create(Service) {
 		try {
 			const query = `
-                INSERT INTO Franchise (
+                INSERT INTO Service (
 					Name,
-                    Address,
-					City
-                ) VALUES (?, ?, ?)
+                    ParentID
+                ) VALUES (?, ?)
             `;
 			const values = [
-				Franchise.Name,
-				Franchise.Address,
-				Franchise.City,
+				Service.Name,
+				Service.ParentID
 			];
 			await BaliHalusDB.execute(query, values);
 		} catch (error) {
@@ -41,20 +39,18 @@ class FranchiseModel {
 		}
 	}
 
-	static async update(Franchise) {
+	static async update(Service) {
 		try {
 			const query = `
-                UPDATE Franchise
+                UPDATE Service
                 SET 
 					Name = ?,
-					Address = ?,
-					City = ?,
-                WHERE FranchiseID = ?
+					ParentID = ?,
+                WHERE ServiceID = ?
             `;
 			const values = [
-				Franchise.Name,
-				Franchise.Address,
-				Franchise.City,
+				Service.Name,
+                Service.ParentID
 			];
 			await BaliHalusDB.execute(query, values);
 		} catch (error) {
@@ -63,26 +59,26 @@ class FranchiseModel {
 		}
 	}
 
-	static async delete(FranchiseID) {
+	static async delete(ServiceID) {
 		try {
 			const query = `
-                DELETE FROM Franchise
-                WHERE FranchiseID = ?
+                DELETE FROM Service
+                WHERE ServiceID = ?
             `;
-			await BaliHalusDB.execute(query, [FranchiseID]);
+			await BaliHalusDB.execute(query, [ServiceID]);
 		} catch (error) {
             console.error(error);
             throw error;
 		}
 	}
 
-	static async readOne(FranchiseID) {
+	static async readOne(ServiceID) {
 		try {
 			const query = `
-                SELECT * FROM Franchise
-                WHERE FranchiseID = ?
+                SELECT * FROM Service
+                WHERE ServiceID = ?
             `;
-			const [rows] = await BaliHalusDB.execute(query, [FranchiseID]);
+			const [rows] = await BaliHalusDB.execute(query, [ServiceID]);
 			return rows[0];
 		} catch (error) {
             console.error(error);
@@ -93,7 +89,7 @@ class FranchiseModel {
 	static async readAll() {
 		try {
 			const query = `
-                SELECT * FROM Franchise
+                SELECT * FROM Service
             `;
 			const [rows] = await BaliHalusDB.execute(query);
 			return rows;
@@ -104,4 +100,4 @@ class FranchiseModel {
 	}
 }
 
-export { FranchiseModel };
+export { ServiceModel };
