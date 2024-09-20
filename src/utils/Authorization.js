@@ -13,16 +13,18 @@ class Authorization {
 
     static async decryption(req, res, next) {
         try {
-            const token = req.cookies.auth_token;
-                if (!token) {
-                    return res.redirect('/login-register');
-                }
+            const token = req.cookies.token;
+            
+            if (!token) {
+                return res.redirect('/login-register');
+            }
 
             const decoded = jwt.verify(token, process.env.SECRET_KEY);
+            
             if (!decoded) {
                 return res.redirect('/login-register');
             }
-            req.dataLogin = decoded;
+            req.dataUser = decoded;
 
             next();
 

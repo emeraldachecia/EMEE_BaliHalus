@@ -5,7 +5,13 @@ import { UserModel } from "../models/UserModel.js";
 class UserController {
 	static async login_register_page(req, res) {
 		try {
-			res.render("login-register-page", { layout: false });
+			res.render("login-register", {
+				layout: "layouts/main",
+				title: "Reservasi Bali Halus",
+				script: "login-register-script.js",
+				style: "login-register-style.css",
+				hideHeader: false
+			});
 		} catch (error) {
 			console.error(error);
 			res.status(error.status || 500).json({ error: error.message });
@@ -54,10 +60,10 @@ class UserController {
 			const payload = { UserID: user.UserID, Name: user.Name, PhoneNumber: user.PhoneNumber };
 			const token = await Authorization.encryption(payload);
 			
-			res.cookie('auth_token', token);
+			res.cookie('token', token);
 
             // Mengirimkan respons sukses
-            res.status(200).json({ message: 'Login successful' });
+            res.status(200).json({ message: 'Login successful', dataUser: payload });
         } catch (error) {
             console.error(error);
             res.status(error.status || 500).json({ error: error.message });
