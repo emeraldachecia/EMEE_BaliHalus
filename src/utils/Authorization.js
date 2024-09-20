@@ -16,12 +16,14 @@ class Authorization {
             const token = req.cookies.token;
             
             if (!token) {
+                console.log("token tidak ada", token);
                 return res.redirect('/login-register');
             }
 
             const decoded = jwt.verify(token, process.env.SECRET_KEY);
-            
+
             if (!decoded) {
+                console.log("decoded tidak ada",decoded);
                 return res.redirect('/login-register');
             }
             req.dataUser = decoded;

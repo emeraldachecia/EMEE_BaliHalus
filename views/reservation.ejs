@@ -1,8 +1,13 @@
+<div id="data-user" get-data="<%= dataUser %>"></div>
+<div id="data-service" get-data="<%= dataService %>"></div>
+<div id="data-franchise" get-data="<%= dataFranchise %>"></div>
+
+
 <div class="container">
     <h1>Spa Reservation</h1>
     <form id="reservationForm">
         <label for="name">Full Name:</label>
-        <input type="text" id="name" name="name" required>
+        <input type="text" id="name" name="name" value="<%= dataUser.Name %>" required>
 
         <label for="date">Select Date:</label>
         <input type="date" id="date" name="date" required>
