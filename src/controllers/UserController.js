@@ -20,7 +20,7 @@ class UserController {
 
 	static async register(req, res) {
 		try {
-			const { User } = req.body;
+			const User = req.body;
 
             const user = await UserModel.readByPhoneNumber(User.PhoneNumber);
             
@@ -32,9 +32,10 @@ class UserController {
 
 			User.Password = hashedPassword;
             
-            await UserModel.create(User);
+			await UserModel.create(User);
+			
+			res.redirect("/login-register");
 
-			res.status(200).json({ message: 'register is success'  });
 		} catch (error) {
 			console.error(error);
 			res.status(error.status || 500).json({ error: error.message });
@@ -43,7 +44,7 @@ class UserController {
 
 	static async login(req, res) {
         try {
-			const { User } = req.body;
+			const User = req.body;
 
             // Mencari user berdasarkan nomor handphone
             const user = await UserModel.readByPhoneNumber(User.PhoneNumber);
@@ -62,8 +63,7 @@ class UserController {
 			
 			res.cookie('token', token);
 
-            // Mengirimkan respons sukses
-            res.status(200).json({ message: 'Login successful', dataUser: payload });
+			res.redirect("/");
         } catch (error) {
             console.error(error);
             res.status(error.status || 500).json({ error: error.message });

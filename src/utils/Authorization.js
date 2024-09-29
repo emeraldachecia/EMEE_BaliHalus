@@ -11,6 +11,7 @@ class Authorization {
         }
     }
 
+
     static async decryption(req, res, next) {
         try {
             const token = req.cookies.token;

@@ -213,7 +213,7 @@ main.sign-up-mode .carousel {
 }
 
 .image {
-    width: 50%;
+    width: 60%;
     grid-column: 1/2;
     grid-row: 1/2;
     opacity: 0;

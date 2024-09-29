@@ -9,7 +9,7 @@ class UserModel {
 					Name VARCHAR(100) NOT NULL,
 					Password TEXT NOT NULL,
 					PhoneNumber VARCHAR(20) NOT NULL UNIQUE,
-					Type ENUM('Member', 'Admin') NOT NULL
+					Type ENUM('Member', 'Admin') NOT NULL DEFAULT 'Member'
 				)
 			`;
 
@@ -32,11 +32,12 @@ class UserModel {
 					Type
                 ) VALUES (?, ?, ?, ?)
             `;
+
 			const values = [
                 User.Name,
 				User.Password,
 				User.PhoneNumber,
-				User.Type,
+				User.Type ? User.Type : "Member", //jika type ada, maka gunakan user.type, jika type tidak ada maka gunakan "member"
 			];
 			await BaliHalusDB.execute(query, values);
 		} catch (error) {
