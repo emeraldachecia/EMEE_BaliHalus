@@ -34,7 +34,7 @@ class UserController {
             
 			await UserModel.create(User);
 			
-			res.redirect("/login-register");
+			return res.redirect("/login-register");
 
 		} catch (error) {
 			console.error(error);
@@ -56,14 +56,20 @@ class UserController {
             const isPasswordValid = await Authentication.decryption(User.Password, user.Password);
             if (!isPasswordValid) {
                 return res.status(401).json({ message: 'Invalid password' });
-			}
+            }
 
+			// Set token dalam cookie
 			const payload = { UserID: user.UserID, Name: user.Name, PhoneNumber: user.PhoneNumber };
 			const token = await Authorization.encryption(payload);
-			
 			res.cookie('token', token);
 
-			res.redirect("/");
+			// Redirect sesuai tipe pengguna
+			if (user.Type === 'Admin') {
+            	return res.redirect('/dashboard-admin');
+        	} else {
+            	return res.redirect('/reservation');
+        	}
+
         } catch (error) {
             console.error(error);
             res.status(error.status || 500).json({ error: error.message });
@@ -73,7 +79,7 @@ class UserController {
 	static async logout(req, res) {
 		try {
 			res.clearCookie('auth_token');
-			res.redirect('/login-register');
+			return res.redirect('/login-register');
 				
 		} catch (error) {
 			console.error(error);

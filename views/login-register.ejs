@@ -58,7 +58,16 @@
                             <label>Password</label>
                         </div>
 
-                        <input type="submit" value="sign up" class="sign-btn">
+                        <div class="input-wrap">
+                            <select class="input-field" name="Type" required>
+                                <option value="" disabled selected hidden></option>
+                                <option value="Admin">Admin</option>
+                                <option value="Member">Member</option>
+                            </select>
+                            <label>User Type</label>
+                        </div>
+
+                        <input type="submit" value="sign up" class="sign-btn"> 
 
                         <p class="text">
                            By signing up, I agree to the <a href="#">Terms of Services</a> and
